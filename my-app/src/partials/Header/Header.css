@@ -1,0 +1,21 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: red;
+	width: 100%;
+}
+
+.header h1 {
+	margin: 0;
+}
+
+.header li {
+	list-style-type: none;
+	margin-right: 10px;
+}
+
+.header ul {
+    display: flex;
+    margin: 0;
+}

@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+button {
+  margin-bottom: 20px;
+}
+
+.App {
+  display: flex;
+  flex-wrap: wrap;
+}

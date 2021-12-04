@@ -1,46 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Card from '../Components/Card/Card';
-import books from "../data/books.json";
-import Fuse from "fuse.js";
 import Search from '../Components/Search/Search';
+import { searchBlog, inputText, dataBlogs } from '../store/reducers/blog'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 
 function Blog() {
-	const [data, setData] = useState(books);
+	const dataInput = useSelector(inputText);
+	const filterBlogs = useSelector(dataBlogs);
+    const dispatch = useDispatch();
 
-  	const searchData = (pattern) => {
-  		const fuse = new Fuse(data, {
-	      keys: ["title", "author"],
-	    });
-	  	const result = fuse.search(pattern);
-	    const matches = [];
-
-	    if (!pattern) {
-	      setData(books);
-	      return;
-	    }
-
-	    if (!result.length) {
-	      setData([]);
-	    } else {
-	      result.forEach(({item}) => {
-	        matches.push(item);
-	      });
-	      setData(matches);
-	    }
-  	};
     return (
         <div>
 	      <h1 className="Title">My Favorite books</h1>
 	      <Search 
 	      	placeholder="Search"
-        	onChange={(e) => searchData(e.target.value)}
+        	onChange={(e) => dispatch(searchBlog(e.target.value))}
           />
-	      
-
 	      <div className="Container">
-	        {data.map((item) => (
+	        <h3>{dataInput}</h3>
+	        {filterBlogs.map((item) => (
 	          <Card {...item} key={item.title} />
 	        ))}
 	      </div>
